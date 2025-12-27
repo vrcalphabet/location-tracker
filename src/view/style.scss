@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
+
+$shadow: 0 0 4px 4px rgb(0 0 0 / 10%);
+$bg-slate-1: rgb(0 0 128 / 3%);
+$bg-slate-2: rgb(0 0 128 / 6%);
+$bg-slate-3: rgb(0 0 128 / 9%);
+$bg-red: rgb(256 32 32 / 10%);
+$bg-green: rgb(32 128 32 / 10%);
+$text-slate: rgb(32 32 64);
+$text-red: rgb(224 64 64);
+$text-green: rgb(32 128 32);
+
+:root {
+  interpolate-size: allow-keywords;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none;
+}
+
+[disabled] {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+html {
+  font-family: 'IBM Plex Sans JP', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  user-select: none;
+  overscroll-behavior-y: none;
+  overflow: hidden;
+}
+
+.-- {
+  &backdrop {
+    background: linear-gradient(to bottom, transparent, rgb(0 0 0 / 50%));
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+  }
+
+  &pointer-none {
+    pointer-events: none;
+  }
+
+  &pointer-all {
+    pointer-events: all;
+  }
+}
+
+.js-maps {
+  width: 100vw;
+  height: 100vh;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  z-index: -1;
+
+  :has(> .gmnoprint) {
+    display: none !important;
+  }
+}
+
+.location-card {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+  &__backdrop {
+    height: 150px;
+    bottom: 0;
+  }
+
+  &__body {
+    margin: 0.75rem;
+    padding: 0 1rem 1rem 1rem;
+    background-color: white;
+    box-shadow: $shadow;
+    border: 1px solid $bg-slate-2;
+    border-radius: 0.75rem;
+    transition-duration: 0.15s;
+    transition-property: height, padding, margin, border-radius;
+    transition-timing-function: cubic-bezier(0.65, 1.05, 0.65, 1.05);
+
+    &--shrink {
+      height: attr(data-height px);
+      margin-bottom: 0;
+      border-radius: 0.75rem 0.75rem 0 0;
+      overflow: hidden;
+    }
+  }
+
+  &__label {
+    color: royalblue;
+    font-size: 0.75rem;
+    margin: 0.25rem 0;
+    display: flex;
+    gap: 0.25rem;
+    font-weight: bold;
+  }
+
+  &__address {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    user-select: text;
+  }
+
+  &__reload {
+    padding: 0 0.5rem;
+    cursor: pointer;
+  }
+
+  &__uncertainty {
+    color: gray;
+    font-size: 0.75rem;
+  }
+
+  &__status-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &:has(> :not(.status-badge[hidden])) {
+      margin: 0.75rem 0;
+    }
+  }
+
+  &__divider {
+    height: 2px;
+    margin: 0.75rem 0;
+    background-color: $bg-slate-2;
+  }
+}
+
+.grabber {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+  margin-bottom: 0.75rem;
+
+  &__body {
+    width: 25%;
+    height: 6px;
+    background-color: $bg-slate-3;
+    border-radius: 9999px;
+  }
+}
+
+.locate {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.75rem;
+
+  &__button {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow: $shadow;
+    border-radius: 0.75rem;
+    border: 1px solid $bg-slate-2;
+    cursor: pointer;
+  }
+}
+
+.status-badge {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  color: $text-slate;
+  border: 2px solid;
+  font-size: 0.75rem;
+
+  &__text {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__icon {
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &--red {
+    background-color: $bg-red;
+    color: $text-red;
+    border-color: $bg-red;
+  }
+
+  &--green {
+    background-color: $bg-green;
+    color: $text-green;
+    border-color: $bg-green;
+  }
+}
+
+.update-time {
+  color: $text-slate;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background-color: $bg-slate-1;
+  border: 2px solid $bg-slate-2;
+  font-size: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+
+  &__item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  &__divider {
+    width: 2px;
+    height: calc(100% - 1rem);
+    background-color: $bg-slate-2;
+    position: absolute;
+    left: 50%;
+  }
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  &__backdrop {
+    transform: rotate(180deg);
+    height: 50px;
+  }
+
+  &__body {
+    margin: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+  }
+
+  &__battery-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.ad {
+  background-color: white;
+  padding: 5px 10px 10px;
+  border-bottom: 1px solid rgb(0 0 0 / 25%);
+
+  &__label {
+    font-size: 0.75rem;
+    color: gray;
+    margin-bottom: -5px;
+  }
+
+  &__content {
+    width: 370px;
+    height: 47px;
+
+    &:not(:has(#vdbanner)):before {
+      content: '';
+      margin: 10px 0;
+      height: 47px;
+      display: block;
+      background-color: rgb(0 0 0 / 5%);
+    }
+  }
+}

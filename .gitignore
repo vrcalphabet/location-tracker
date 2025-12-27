@@ -1,0 +1,11 @@
+node_modules/
+vendor/
+
+.agent/
+.vscode/
+!.vscode/extensions.json
+
+public_html/assets/
+
+.DS_Store
+.env
