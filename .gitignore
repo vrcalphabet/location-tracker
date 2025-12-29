@@ -5,7 +5,8 @@ vendor/
 .vscode/
 !.vscode/extensions.json
 
-public_html/assets/
+public_html/assets/*
+!public_html/assets/icons/
 
 .DS_Store
 .env
